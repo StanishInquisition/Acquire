@@ -4,6 +4,10 @@ import pandas as pd
 import numpy as np
 
 
+
+# mygame = Game(example_game)
+#
+# for players in mygame.players
 class Game():
     """
     Class for making a new game.
@@ -33,7 +37,7 @@ class Game():
     def remove_player(self):
         rplayer = input("Players: {1}. Remove which player? >> ".format(str(self.players)))
         self.players.remove(rplayer)
-
+#testgit
 
     def board_generator(self):
         """
@@ -76,13 +80,20 @@ class Player():
     def __init__(self, name, game):
         self.game = game
         self.name = name
-        self.tiles = populate_tiles(game.sack) #this is just a template, doesn't work yet
+        self.tiles = populate_tiles(game.sack) #must interact with game.sack...
         self.money = 6000
         self.properties = {'Luxor': 0, 'Tower': 0,
                          'American': 0,  'Festival': 0,
                          'Worldwide': 0, 'Continental': 0,
                          'Imperial': 0}
+
+
         print('Player "{0}" created with ${2}'.format(self.Name))
+
+
+
+    def populate_tiles(self, sackname):
+
 
     def draw_tile(self, number):
         if len(self.Tiles) > 5:

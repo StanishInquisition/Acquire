@@ -1,0 +1,14 @@
+# Python 3
+
+class Game():
+
+    def __init__(self, game_name, *arg):
+        self.game_name = game_name
+        self.player_list = []
+        for a in arg:
+            self.player_list.append(a)
+        print("There are", len(self.player_list), " players.")
+        print("The players are: ", self.player_list)
+
+my_game = Game("Game1_8_28_2016_1", "stanton", "russ", "jeff", "peter")
+
