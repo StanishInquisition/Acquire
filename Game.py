@@ -2,17 +2,19 @@
 
 import pandas as pd
 import numpy as np
+import random as rand
+
+# my_game = Game("Game1_8_28_2016_1", "stanton", "russ", "jeff", "peter")
+# my_game.start_game
 
 
-
-# mygame = Game(example_game)
-#
-# for players in mygame.players
-class Game():
+class Game:
     """
     Class for making a new game.
     """
-    def __init__(self, game_name):
+    def __init__(self, gamename, *arg):
+        self.game_name = gamename
+        self.player_list = self.generate_player_list(*arg)
         self.columns = ['1', '2', '3',
                         '4', '5', '6',
                         '7', '8', '9',
@@ -20,26 +22,23 @@ class Game():
         self.rows = ['A', 'B', 'C',
                      'D', 'E', 'F',
                      'G', 'H', 'I']
-
         self.properties = ['Luxor', 'Tower',
                       'American', 'Festival', 'Worldwide',
                       'Continental', 'Imperial']
-        self.name = game_name
-        self.players = []
-        self.board = self.board_generator()
-        self.sack = self.sack_generator(self.columns, self.rows)
+        self.board = self.generate_board()
+        self.sack = self.generate_sack(self.columns, self.rows)
 
 
-    def add_player(self, player):
-        self.players.append(player)
+    def generate_player_list(self, *arg):
+        playerlist = []
+        for a in *arg:
+            playerlist.append(a)
+        print("There are ", len(player_list), "players.")
+        print("The players are: ", self.player_list)
+        return playerlist
 
 
-    def remove_player(self):
-        rplayer = input("Players: {1}. Remove which player? >> ".format(str(self.players)))
-        self.players.remove(rplayer)
-#testgit
-
-    def board_generator(self):
+    def generate_board(self):
         """
         Generates a board matrix as a Pandas DataFrame
         made from cols & rows vars.
@@ -48,7 +47,12 @@ class Game():
         return board
 
 
-    def sack_generator(self, cols, rows):
+    def remove_player(self):
+        rplayer = input("Players: {1}. Remove which player? >> ".format(str(self.players)))
+        self.player_list.remove(rplayer)
+
+
+    def generate_sack(self, cols, rows):
         """
         Function returns a list called 'sack' filled with tile names made from cols & rows vars
         """
@@ -59,7 +63,7 @@ class Game():
         return sack
 
 
-    def start(self):
+    def start_game(self):
         command = input('Start new game - 1; Continue saved game - 2;')
 
         if command == '1':
@@ -76,7 +80,13 @@ class Game():
             quit()
 
 
-class Player():
+class Engine:
+    def __init__(self):
+        self.
+
+
+
+class Player:
     def __init__(self, name, game):
         self.game = game
         self.name = name
@@ -87,13 +97,13 @@ class Player():
                          'Worldwide': 0, 'Continental': 0,
                          'Imperial': 0}
 
-
-        print('Player "{0}" created with ${2}'.format(self.Name))
+        print('Player "{0}" created with ${1}'.format(self.name, self.money))
 
 
 
     def populate_tiles(self, sackname):
-
+        #take random tiles from sack
+        pass
 
     def draw_tile(self, number):
         if len(self.Tiles) > 5:
