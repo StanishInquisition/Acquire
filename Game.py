@@ -10,31 +10,30 @@ import random as rand
 
 class Game:
     """
-    Class for making a new game.
+    Instantiate a new game by passing a game name and player names in the args
     """
     def __init__(self, gamename, *arg):
         self.game_name = gamename
         self.player_list = self.generate_player_list(*arg)
-        self.columns = ['1', '2', '3',
-                        '4', '5', '6',
-                        '7', '8', '9',
-                        '10', '11', '12']
-        self.rows = ['A', 'B', 'C',
-                     'D', 'E', 'F',
-                     'G', 'H', 'I']
-        self.properties = ['Luxor', 'Tower',
-                      'American', 'Festival', 'Worldwide',
-                      'Continental', 'Imperial']
-        self.board = self.generate_board()
+        self.columns =      ['1', '2', '3',
+                              '4', '5', '6',
+                              '7', '8', '9',
+                             '10', '11', '12']
+        self.rows =         ['A', 'B', 'C',
+                             'D', 'E', 'F',
+                             'G', 'H', 'I']
+        self.properties =   ['Luxor', 'Tower',
+                             'American', 'Festival', 'Worldwide',
+                             'Continental', 'Imperial']
+        self.board = pd.DataFrame(index=self.rows, columns=self.columns)
         self.sack = self.generate_sack(self.columns, self.rows)
-
 
     def generate_player_list(self, *arg):
         playerlist = []
-        for a in *arg:
+        for a in arg:
             playerlist.append(a)
-        print("There are ", len(player_list), "players.")
-        print("The players are: ", self.player_list)
+        print("There are ", len(playerlist), "players.")
+        print("The players are: ", playerlist)
         return playerlist
 
 
@@ -54,9 +53,9 @@ class Game:
 
     def generate_sack(self, cols, rows):
         """
-        Function returns a list called 'sack' filled with tile names made from cols & rows vars
+        Return a list filled with tile names made from cols & rows
         """
-        sack = self.sack
+        sack = []
         for c in cols:
             for r in rows:
                 sack.append(c + r)
@@ -82,7 +81,7 @@ class Game:
 
 class Engine:
     def __init__(self):
-        self.
+        pass
 
 
 
