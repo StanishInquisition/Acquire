@@ -47,8 +47,8 @@ class Game:
 
 
     def remove_player(self):
-        rplayer = input("Players: {1}. Remove which player? >> ".format(str(self.players)))
-        self.player_list.remove(rplayer)
+        removed_player = input("Players: {0}. Remove which players?".format(" ".join(self.player_list)))
+        self.player_list.remove(removed_player)
 
 
     def generate_sack(self, cols, rows):
