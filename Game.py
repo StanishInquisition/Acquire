@@ -10,7 +10,7 @@ import random as rand
 
 class Game:
     """
-    Instantiate a new game by passing a game name and player names in the args
+    Instantiate a new game by passing a game name and player names as arguments.
     """
     def __init__(self, gamename, *arg):
         self.game_name = gamename
@@ -82,7 +82,6 @@ class Game:
 class Engine:
     def __init__(self):
         pass
-
 
 
 class Player:
