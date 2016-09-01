@@ -16,18 +16,20 @@ class Game:
         self.game_name = gamename
         self.player_list = self.generate_player_list(*arg)
         for player in self.player_list:
-            self.generate_player(player)
-            #create a Player instance for each player in the list, set player attributes to local game attributes
-        self.columns =      ['1', '2', '3',
-                              '4', '5', '6',
-                              '7', '8', '9',
-                              '10', '11', '12']
-        self.rows =         ['A', 'B', 'C',
-                             'D', 'E', 'F',
-                             'G', 'H', 'I']
-        self.properties =   ['Luxor', 'Tower',
-                             'American', 'Festival', 'Worldwide',
-                             'Continental', 'Imperial']
+            player = self.generate_player(player)
+        # generate a Player class instance for each player in the player_list
+        # look here for correct way of doing this: http://stackoverflow.com/questions/17662157/create-classes-in-a-loop-where-the-class-name-comes-from-a-list
+
+        self.columns = ['1', '2', '3',
+                        '4', '5', '6',
+                        '7', '8', '9',
+                        '10', '11', '12']
+        self.rows = ['A', 'B', 'C',
+                     'D', 'E', 'F',
+                     'G', 'H', 'I']
+        self.properties = ['Luxor', 'Tower',
+                           'American', 'Festival', 'Worldwide',
+                           'Continental', 'Imperial']
         self.board = self.generate_board()
         self.sack = self.generate_sack(self.columns, self.rows)
 
@@ -46,7 +48,9 @@ class Game:
 
 
     def generate_player(self, playername):
-        # create an instance of class Player for each name in self.playerlist
+        """
+        Create an instance of class Player for each name in self.player_list
+        """
         playername = Player(playername, self.game_name)
 
     def generate_board(self):
