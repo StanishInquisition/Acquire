@@ -15,27 +15,39 @@ class Game:
     def __init__(self, gamename, *arg):
         self.game_name = gamename
         self.player_list = self.generate_player_list(*arg)
+        for player in self.player_list:
+            self.generate_player(player)
+            #create a Player instance for each player in the list, set player attributes to local game attributes
         self.columns =      ['1', '2', '3',
                               '4', '5', '6',
                               '7', '8', '9',
-                             '10', '11', '12']
+                              '10', '11', '12']
         self.rows =         ['A', 'B', 'C',
                              'D', 'E', 'F',
                              'G', 'H', 'I']
         self.properties =   ['Luxor', 'Tower',
                              'American', 'Festival', 'Worldwide',
                              'Continental', 'Imperial']
-        self.board = pd.DataFrame(index=self.rows, columns=self.columns)
+        self.board = self.generate_board()
         self.sack = self.generate_sack(self.columns, self.rows)
 
-    def generate_player_list(self, *arg):
+
+    def __str__(self):
+        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_list), ", ".join(self.properties))
+
+    @staticmethod
+    def generate_player_list(*arg):
         playerlist = []
         for a in arg:
             playerlist.append(a)
-        print("There are ", len(playerlist), "players.")
-        print("The players are: ", playerlist)
+        print("\n\nPlayer list generated.")
+        print("There are", len(playerlist), "players:\n", ", ".join(playerlist))
         return playerlist
 
+
+    def generate_player(self, playername):
+        # create an instance of class Player for each name in self.playerlist
+        playername = Player(playername, self.game_name)
 
     def generate_board(self):
         """
@@ -43,6 +55,8 @@ class Game:
         made from cols & rows vars.
         """
         board = pd.DataFrame(index=self.rows, columns=self.columns)
+        print("\nBoard generated.")
+        print(board)
         return board
 
 
