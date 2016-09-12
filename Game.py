@@ -30,7 +30,7 @@ class Game:
         self.sack = self.generate_sack(self.columns, self.rows)
 
     def __str__(self):
-        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_dict), ", ".join(self.properties))
+        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_dict.keys()), ", ".join(self.properties))
 
     def generate_player(self, player_names):
         """
