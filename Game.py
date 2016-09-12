@@ -4,9 +4,6 @@ import pandas as pd
 import numpy as np
 import random as rand
 
-# my_game = Game("Game1_8_28_2016_1", "stanton", "russ", "jeff", "peter")
-# my_game.start_game
-
 
 class Game:
     """
@@ -14,12 +11,11 @@ class Game:
     """
     def __init__(self, gamename, *arg):
         self.game_name = gamename
-        self.player_list = self.generate_player_list(*arg)
-        for player in self.player_list:
-            player = self.generate_player(player)
-        # generate a Player class instance for each player in the player_list
-        # look here for correct way of doing this: http://stackoverflow.com/questions/17662157/create-classes-in-a-loop-where-the-class-name-comes-from-a-list
-
+        self.player_dict = {}
+        for a in arg:
+            self.generate_player(a)
+            # self.player_dict[a] = Player(a, self.game_name)
+            # http://stackoverflow.com/questions/17662157/create-classes-in-a-loop-where-the-class-name-comes-from-a-list
         self.columns = ['1', '2', '3',
                         '4', '5', '6',
                         '7', '8', '9',
@@ -33,25 +29,16 @@ class Game:
         self.board = self.generate_board()
         self.sack = self.generate_sack(self.columns, self.rows)
 
-
     def __str__(self):
-        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_list), ", ".join(self.properties))
+        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_dict), ", ".join(self.properties))
 
-    @staticmethod
-    def generate_player_list(*arg):
-        playerlist = []
-        for a in arg:
-            playerlist.append(a)
-        print("\n\nPlayer list generated.")
-        print("There are", len(playerlist), "players:\n", ", ".join(playerlist))
-        return playerlist
-
-
-    def generate_player(self, playername):
+    def generate_player(self, player_names):
         """
-        Create an instance of class Player for each name in self.player_list
+        Create an instance of class Player for each arg passed to Game and insert into Game.player_dict
         """
-        playername = Player(playername, self.game_name)
+        for name in player_names:
+            self.player_dict[name] = Player(name, self.game_name)
+            print("Player: %s" % name)
 
     def generate_board(self):
         """
@@ -63,13 +50,12 @@ class Game:
         print(board)
         return board
 
-
     def remove_player(self):
-        removed_player = input("Players: {0}. Remove which players?".format(" ".join(self.player_list)))
-        self.player_list.remove(removed_player)
+        removed_player = input("Players: {0}. Remove which players?".format(" ".join(self.player_dict)))
+        self.player_dict.remove(removed_player)
 
-
-    def generate_sack(self, cols, rows):
+    @staticmethod
+    def generate_sack(cols, rows):
         """
         Return a list filled with tile names made from cols & rows
         """
@@ -78,7 +64,6 @@ class Game:
             for r in rows:
                 sack.append(c + r)
         return sack
-
 
     def start_game(self):
         command = input('Start new game - 1; Continue saved game - 2;')
@@ -106,7 +91,7 @@ class Player:
     def __init__(self, name, game):
         self.game = game
         self.name = name
-        self.tiles = populate_tiles(game.sack) #must interact with game.sack...
+        self.tiles = self.populate_tiles(game.sack)
         self.money = 6000
         self.properties = {'Luxor': 0, 'Tower': 0,
                          'American': 0,  'Festival': 0,
@@ -115,11 +100,9 @@ class Player:
 
         print('Player "{0}" created with ${1}'.format(self.name, self.money))
 
-
-
     def populate_tiles(self, sackname):
-        #take random tiles from sack
-        pass
+        #take tiles from sack
+        return True
 
     def draw_tile(self, number):
         if len(self.Tiles) > 5:
@@ -131,7 +114,6 @@ class Player:
 
     def play_tile(self):
         pass
-
 
     def player_purchase(self, Property, TileCount):
         pass

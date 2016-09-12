@@ -1,5 +1,5 @@
-import Game as g
+from Game import *
 
-my_game = g.Game("my_game", "Ohyoon", "Stan", "Peter", "Russ", "John", "Jeff")
+my_game = Game("my_game", "Ohyoon", "Stan", "Peter", "Russ", "John", "Jeff")
 
 # print(my_game)
