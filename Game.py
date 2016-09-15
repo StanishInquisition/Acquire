@@ -3,19 +3,23 @@
 import pandas as pd
 import numpy as np
 import random as rand
+from pprint import pprint
+import logging
 
 
 class Game:
     """
-    Instantiate a new game by passing a game name and player names as arguments.
+    Initialize a new game by passing a game name and player names as string arguments.
+    e.g. : my_game = Game("my_game", "Chris", "Terry", "Pat", "Ramsey")
+    This will also generate instaces of the Player class for each of those names and
+    insert those objects into self.player_dict attribute
     """
-    def __init__(self, gamename, *playerlist):
+    def __init__(self, gamename, *args):
         self.game_name = gamename
+
         self.player_dict = {}
-        for p in playerlist:
-            self.generate_player(p)
-            # self.player_dict[a] = Player(a, self.game_name)
-            # http://stackoverflow.com/questions/17662157/create-classes-in-a-loop-where-the-class-name-comes-from-a-list
+        self.generate_players(args)
+
         self.columns = ['1', '2', '3',
                         '4', '5', '6',
                         '7', '8', '9',
@@ -23,20 +27,34 @@ class Game:
         self.rows = ['A', 'B', 'C',
                      'D', 'E', 'F',
                      'G', 'H', 'I']
+        self.board = self.generate_board()
+        self.altboard = self.generate_board_non_pandas()
+
         self.properties = ['Luxor', 'Tower',
                            'American', 'Festival', 'Worldwide',
                            'Continental', 'Imperial']
-        self.board = self.generate_board()
+
         self.sack = self.generate_sack(self.columns, self.rows)
+        pprint(vars(self))
 
     def __str__(self):
-        return "Game name: {0}.\nPlayer list: {1}.\n Properties: {2}".format(self.game_name, ", ".join(self.player_dict.keys()), ", ".join(self.properties))
+        # p = self.player_dict
+        return "Game name: {0}. \n Player list: {1}. \n Properties: {2}. \n Sack: {3}. \n Board:\n{4}, \n Player stats: \n {5} ".format(
+            self.game_name,
+            ", ".join(self.player_dict.keys()),
+            ", ".join(self.properties),
+            ', '.join(self.sack),
+            self.board,
+            [pprint(self.player_dict[player]) for player in self.player_dict])
+            # [(p[player].name, p[player].properties, p[player].money, p[player].tiles, p[player].) for player in p]
+            # )
 
-    def generate_player(self, player_names):
+    def generate_players(self, names):
         """
-        Create an instance of class Player for each arg passed to Game and insert into Game.player_dict
+            Create an instance of class Player for each name argument (*args) passed to Game
+            and insert into self.player_dict
         """
-        for name in player_names:
+        for name in names:
             self.player_dict[name] = Player(name, self.game_name)
 
     def generate_board(self):
@@ -44,10 +62,24 @@ class Game:
         Generates a board matrix as a Pandas DataFrame
         made from cols & rows vars.
         """
+
         board = pd.DataFrame(index=self.rows, columns=self.columns)
         print("\nBoard generated.")
-        print(board)
         return board
+
+# TODO: make an alternative board using nested lists:
+    def generate_board_non_pandas(self):
+        """
+        Create a board that works on pythonista using nested list.
+        Should function exactly the same in order to work correclty
+        """
+        return [["[]"] * self.columns for x in range(self.rows)]
+        print("Alternative board created.")
+        self.print_board_non_pandas()
+
+    def print_board_non_pandas(self):
+        print(''.join(row)) for row in self.altboard
+
 
     def remove_player(self):
         removed_player = input("Players: {0}. Remove which players?".format(" ".join(self.player_dict)))
@@ -100,7 +132,8 @@ class Player:
                          'Worldwide': 0, 'Continental': 0,
                          'Imperial': 0}
 
-        print('Player "{0}" created with ${1}'.format(self.name, self.money))
+        # print('Player "{0}" created'.format(self.name))
+        pprint(vars(self))
 
     def __str__(self):
         return 'Player: {0} \n Game: {1} \n Tiles: {2} \n Money: {3} \n Properties: {4}'.format(self.name, self.game, self.tiles, self.money, self.properties)
