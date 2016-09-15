@@ -9,11 +9,11 @@ class Game:
     """
     Instantiate a new game by passing a game name and player names as arguments.
     """
-    def __init__(self, gamename, *arg):
+    def __init__(self, gamename, *playerlist):
         self.game_name = gamename
         self.player_dict = {}
-        for a in arg:
-            self.generate_player(a)
+        for p in playerlist:
+            self.generate_player(p)
             # self.player_dict[a] = Player(a, self.game_name)
             # http://stackoverflow.com/questions/17662157/create-classes-in-a-loop-where-the-class-name-comes-from-a-list
         self.columns = ['1', '2', '3',
@@ -38,7 +38,6 @@ class Game:
         """
         for name in player_names:
             self.player_dict[name] = Player(name, self.game_name)
-            print("Player: %s" % name)
 
     def generate_board(self):
         """
@@ -66,7 +65,7 @@ class Game:
         return sack
 
     def start_game(self):
-        command = input('Start new game - 1; Continue saved game - 2;')
+        command = input('Start new game - 1; Browse and continue saved game - 2;')
 
         if command == '1':
             self.name = input('Game name? >>')
@@ -81,6 +80,9 @@ class Game:
         else:
             quit()
 
+    def draw_tiles(self, player, number_of_tiles):
+        pass
+
 
 class Engine:
     def __init__(self):
@@ -91,7 +93,7 @@ class Player:
     def __init__(self, name, game):
         self.game = game
         self.name = name
-        self.tiles = self.populate_tiles(game.sack)
+        self.tiles = []
         self.money = 6000
         self.properties = {'Luxor': 0, 'Tower': 0,
                          'American': 0,  'Festival': 0,
@@ -100,12 +102,15 @@ class Player:
 
         print('Player "{0}" created with ${1}'.format(self.name, self.money))
 
+    def __str__(self):
+        return 'Player: {0} \n Game: {1} \n Tiles: {2} \n Money: {3} \n Properties: {4}'.format(self.name, self.game, self.tiles, self.money, self.properties)
+
     def populate_tiles(self, sackname):
         #take tiles from sack
         return True
 
     def draw_tile(self, number):
-        if len(self.Tiles) > 5:
+        if len(self.tiles) > 5:
             print("Max number of tiles reached.")
             pass
         else:
