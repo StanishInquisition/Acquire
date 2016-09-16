@@ -25,24 +25,20 @@ class Game:
         self.player_dict = {}
         self.generate_players(args)
 
-        self.columns = ['1', '2', '3',
-                        '4', '5', '6',
-                        '7', '8', '9',
+        self.columns = ['01', '02', '03',
+                        '04', '05', '06',
+                        '07', '08', '09',
                         '10', '11', '12']
         self.altcolumns = ['@',
                            '01', '02', '03',
                            '04', '05', '06',
                            '07', '08', '09',
                            '10', '11', '12']
-        # self.altcolumns = self.columns.copy().insert(0, '@')
-
+        # self.altcolumns = list(self.columns)
         self.rows = ['A', 'B', 'C',
                      'D', 'E', 'F',
                      'G', 'H', 'I']
-        # self.altrows = ['A', 'B', 'C',
-        #              'D', 'E', 'F',
-        #              'G', 'H', 'I']
-        self.altrows = self.rows.copy()
+        self.altrows = list(self.rows)
         self.board = self.generate_board()
         self.altboard = self.generate_altboard()
 
