@@ -1,4 +1,6 @@
-""" for testing alt board functions, getting the row/column labels in, etc."""
+"""
+For testing alternate board construction using nested lists,
+getting the row/column labels in, etc."""
 import pprint
 
 pp = pprint.PrettyPrinter(width=100, compact=True)
@@ -6,7 +8,6 @@ pp = pprint.PrettyPrinter(width=100, compact=True)
 rows = ['A', 'B', 'C',
         'D', 'E', 'F',
         'G', 'H', 'I']
-print(len(rows))
 columns = ['@',
            '01', '02', '03',
            '04', '05', '06',
@@ -32,9 +33,9 @@ pp.pprint(grid)
 # Return the index in the list of the first item whose value is x.
 # It is an error if there is no such item.
 
-# for item in rows:
-#      grid.insert(rows.index(item), "butts")
-# for row in grid, item in rows:
-#     i = 0
-#     grid.insert(rows.index(item), rows[i])
-#     i += 1
+
+
+
+
+
+
